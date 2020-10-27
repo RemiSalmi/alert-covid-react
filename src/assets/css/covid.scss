@@ -1,0 +1,793 @@
+$bg: url("https://www.transparenttextures.com/patterns/dark-stripes.png");
+$bg-cheek: url("https://www.transparenttextures.com/patterns/gray-lines.png");
+$linear: linear-gradient(
+  to left top,
+  #9d1231,
+  #ae1a38,
+  #be2240,
+  #d02a47,
+  #e1324f,
+  #ea4153,
+  #f34e58,
+  #fc5b5d,
+  #fd6e61,
+  #fe7f68,
+  #ff8f70,
+  #ff9e7a
+);
+
+$spot: #770817;
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+.covidContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.covid-wrapper {
+  position: relative;
+}
+
+@mixin stick($bottom, $left) {
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin spot($top, $right, $width, $height) {
+  top: $top;
+  right: $right;
+  width: $width;
+  height: $height;
+}
+
+@mixin virus($top, $left, $width, $height) {
+  top: $top;
+  left: $left;
+  width: $width;
+  height: $height;
+}
+
+.covid-sticks {
+  position: absolute;
+  bottom: 33px;
+  left: 36px;
+}
+
+.covid {
+  background-image: $bg, $linear;
+  width: 410px;
+  height: 410px;
+  z-index: 2;
+  overflow: hidden;
+  position: relative;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  &-pulse {
+    content: "";
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(204, 129, 44, 0.21);
+  }
+  70% {
+    box-shadow: 0 0 8px 55px rgba(255, 0, 0, 0.24);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.26);
+  }
+}
+
+.covid-stick {
+  position: absolute;
+  overflow: visible;
+  display: block;
+  width: 6px;
+  z-index: -1;
+  height: 50px;
+  background-image: $bg, $linear;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: $bg, $linear;
+    top: 36px;
+    right: -5px;
+    border-radius: 50%;
+  }
+  &:nth-child(1) {
+    @include stick(40px, 40px);
+    transform: rotate(45deg);
+  }
+  &:nth-child(2) {
+    @include stick(110px, 8px);
+    transform: rotate(70deg);
+  }
+  &:nth-child(3) {
+    @include stick(180px, -14px);
+    transform: rotate(90deg);
+  }
+  &:nth-child(4) {
+    @include stick(255px, 10px);
+    transform: rotate(110deg);
+  }
+  &:nth-child(5) {
+    @include stick(335px, 51px);
+    transform: rotate(130deg);
+  }
+  &:nth-child(6) {
+    @include stick(370px, 122px);
+    transform: rotate(154deg);
+  }
+  &:nth-child(7) {
+    @include stick(370px, 277px);
+    transform: rotate(-154deg);
+  }
+  &:nth-child(8) {
+    @include stick(396px, 200px);
+    transform: rotate(180deg);
+  }
+  &:nth-child(9) {
+    @include stick(335px, 350px);
+    transform: rotate(-130deg);
+  }
+  &:nth-child(10) {
+    @include stick(255px, 390px);
+    transform: rotate(-110deg);
+  }
+  &:nth-child(11) {
+    @include stick(180px, 415px);
+    transform: rotate(-90deg);
+  }
+  &:nth-child(12) {
+    @include stick(110px, 392px);
+    transform: rotate(-70deg);
+  }
+  &:nth-child(13) {
+    @include stick(40px, 362px);
+    transform: rotate(-45deg);
+  }
+}
+
+.covid-spot {
+  background-image: $bg;
+  background-color: #7f0918;
+  position: absolute;
+  border-radius: 50%;
+  &:nth-child(1) {
+    @include spot(216px, 50px, 22px, 22px);
+    background-color: #90101e;
+  }
+  &:nth-child(2) {
+    @include spot(56px, 140px, 24px, 24px);
+    background-color: #90101e;
+  }
+  &:nth-child(3) {
+    @include spot(136px, 35px, 18px, 18px);
+    background-color: #630510;
+  }
+  &:nth-child(4) {
+    @include spot(46px, 255px, 28px, 28px);
+    background-color: #bc413e;
+  }
+  &:nth-child(5) {
+    @include spot(106px, 335px, 18px, 18px);
+    background-color: #bc413e;
+  }
+  &:nth-child(6) {
+    @include spot(206px, 315px, 52px, 52px);
+    background: $bg,
+      linear-gradient(
+        305deg,
+        rgba(128, 16, 21, 1) 0%,
+        rgba(170, 52, 50, 1) 100%
+      );
+  }
+  &:nth-child(7) {
+    @include spot(256px, 295px, 14px, 14px);
+    background-color: #801216;
+  }
+  &:nth-child(8) {
+    @include spot(286px, 365px, 38px, 38px);
+    background-color: #801216;
+  }
+  &:nth-child(9) {
+    @include spot(286px, 45px, 16px, 16px);
+    background-color: #801216;
+  }
+  &:nth-child(10) {
+    @include spot(75px, 75px, 36px, 36px);
+    background-color: #801216;
+  }
+  &:nth-child(11) {
+    @include spot(240px, 90px, 50px, 50px);
+    background-color: #7a0a14;
+  }
+}
+
+.virus {
+  position: absolute;
+  border-radius: 50%;
+  animation: slip 7s linear infinite alternate;
+  &:nth-child(1) {
+    @include virus(0, -20px, 22px, 22px);
+    background-color: #f43a62;
+    box-shadow: inset 0px 0px 0px 4px #f43a62, 0 0 12px 3px #f43a62;
+    animation-delay: 0.6s;
+  }
+  &:nth-child(2) {
+    @include virus(190px, -140px, 32px, 32px);
+    background-color: #f43a62;
+    box-shadow: inset 0px 0px 0px 6px #f43a62, 0 0 12px 3px #f43a62;
+    animation-delay: 0.7s;
+  }
+  &:nth-child(3) {
+    @include virus(140px, 540px, 32px, 32px);
+    background-color: #f08e61;
+    box-shadow: inset 0px 0px 0px 6px #f08e61, 0 0 12px 3px #f08e61;
+    animation-delay: 1s;
+  }
+  &:nth-child(4) {
+    @include virus(440px, -70px, 22px, 22px);
+    background-color: #f08e61;
+    box-shadow: inset 0px 0px 0px 4px #f08e61, 0 0 12px 3px #f08e61;
+    animation-delay: 0.3s;
+  }
+  &:nth-child(5) {
+    @include virus(450px, 560px, 22px, 22px);
+    background-color: #f43a62;
+    box-shadow: inset 0px 0px 0px 4px #f43a62, 0 0 12px 3px #f43a62;
+    animation-delay: 1.2s;
+  }
+  &:nth-child(6) {
+    @include virus(-40px, 460px, 22px, 22px);
+    background-color: #f43a62;
+    box-shadow: inset 0px 0px 0px 4px #f43a62, 0 0 12px 3px #f43a62;
+    animation-delay: 2s;
+  }
+  &:nth-child(7) {
+    @include virus(-130px, 200px, 22px, 22px);
+    background-color: #f08e61;
+    box-shadow: inset 0px 0px 0px 4px #f08e61, 0 0 12px 3px #f08e61;
+    animation-delay: 1.4s;
+  }
+  &:nth-child(8) {
+    @include virus(30px, -180px, 32px, 32px);
+    background-color: #f08e61;
+    box-shadow: inset 0px 0px 0px 6px #f08e61, 0 0 12px 3px #f08e61;
+    animation-delay: 1.5s;
+  }
+  &:nth-child(9) {
+    @include virus(270px, 500px, 22px, 22px);
+    background-color: #f43a62;
+    box-shadow: inset 0px 0px 0px 4px #f43a62, 0 0 12px 3px #f43a62;
+    animation-delay: 0.8s;
+  }
+  &:nth-child(10) {
+    @include virus(390px, 470px, 22px, 22px);
+    background-color: #f08e61;
+    box-shadow: inset 0px 0px 0px 6px #f08e61, 0 0 12px 3px #f08e61;
+    animation-delay: 1.1s;
+  }
+}
+
+@keyframes slip {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  20% {
+    transform: translate(-6px, -6px);
+  }
+  40% {
+    transform: translate(0px, 0px);
+  }
+  60% {
+    transform: translate(-10px, -2px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.covid-eyes {
+  position: absolute;
+  background: #110534;
+  background: linear-gradient(113deg, #110534 0%, #2e1672 100%);
+  width: 18px;
+  height: 26px;
+  right: 230px;
+  bottom: 61%;
+  border-radius: 50%;
+  animation: eyes-blink 4s infinite;
+  &.left {
+    right: 160px;
+    &:before {
+      right: 9px;
+    }
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    right: 5px;
+    top: 6px;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+}
+
+@keyframes eyes-blink {
+  0% {
+    transform: scaleY(1);
+  }
+
+  2% {
+    transform: scaleY(0.1);
+  }
+
+  4% {
+    transform: scaleY(1);
+  }
+
+  6% {
+    transform: scaleY(0.1);
+  }
+
+  8% {
+    transform: scaleY(1);
+  }
+
+  66% {
+    transform: scaleY(1);
+  }
+
+  68% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.covid-eyebrow {
+  top: 35%;
+  position: absolute;
+  border: 9px solid #550611;
+  border-color: transparent transparent transparent #550611;
+  height: 43px;
+  width: 122px;
+  right: 38%;
+  border-radius: 50px 0 0 50px;
+  transform: rotate(56deg);
+  &:before {
+    content: "";
+    position: absolute;
+    background-color: #550611;
+    width: 9px;
+    height: 9px;
+    top: -5px;
+    left: -3px;
+    border-radius: 50%;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    background-color: #550611;
+    width: 9px;
+    height: 9px;
+    top: 20px;
+    left: -4px;
+    border-radius: 50%;
+  }
+  &.right {
+    left: 160px;
+    top: 148px;
+    transform: rotate(112deg);
+  }
+}
+
+.covid-mouth {
+  position: absolute;
+  top: 62%;
+  border: 4px solid #550611;
+  border-color: transparent transparent transparent #550611;
+  height: 45px;
+  width: 152px;
+  right: 30%;
+  border-radius: 50px 0 0 50px;
+  transform: rotate(90deg);
+}
+
+.covid-cheek {
+  position: absolute;
+  background-image: $bg-cheek,
+    linear-gradient(
+      90deg,
+      rgba(254, 106, 165, 1) 0%,
+      rgba(250, 65, 122, 1) 100%
+    );
+  width: 60px;
+  height: 40px;
+  top: 41%;
+  left: 110px;
+  border-radius: 50%;
+  opacity: 0.7;
+  &.right {
+    position: absolute;
+    left: 240px;
+  }
+}
+
+.earth {
+  @include spot(68%, 25%, 200px, 200px);
+  position: absolute;
+  z-index: 9;
+  border-radius: 50%;
+  overflow: hidden;
+  background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png"),
+    linear-gradient(135deg, rgba(110, 208, 213, 1) 0%, rgba(7, 77, 171, 1) 100%);
+}
+
+.earth-detail {
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  width: 207px;
+  height: 210px;
+  z-index: 1;
+  right: 99px;
+  bottom: -74px;
+  box-shadow: inset 0px -11px 10px 15px #c7c9d3;
+}
+
+.earth-greens {
+  @include spot(24px, 123px, 70px, 54px);
+  position: absolute;
+  background: #bbe474;
+  border-radius: 50%;
+  &:before {
+    content: "";
+    @include spot(0, -4%, 19px, 14px);
+    position: absolute;
+    background: #bbe474;
+    border-radius: 0 20px 20px 20px;
+    transform: rotate(-34deg);
+  }
+  &:after {
+    content: "";
+    @include spot(-3px, -14px, 18px, 13px);
+    position: absolute;
+    background-color: #bbe474;
+    border-radius: 50%;
+  }
+  &:nth-child(1) {
+    @include spot(19px, 47%, 25px, 14px);
+    background: #bbe474;
+    border-radius: 50%;
+    &:before {
+      content: "";
+      @include spot(39px, 47px, 25px, 25px);
+    }
+    &:after {
+      content: "";
+      @include spot(25px, 20px, 22px, 30px);
+      transform: rotate(14deg);
+      border-radius: 65% 35% 83% 17% / 73% 27% 73% 27%;
+    }
+  }
+  &:nth-child(2) {
+    @include spot(60px, 68%, 14px, 22px);
+    background: #bbe474;
+    border-radius: 50%;
+  }
+  &:nth-child(3) {
+    @include spot(43px, 52%, 12px, 11px);
+    background: #bbe474;
+    border-radius: 50%;
+    &:before {
+      content: "";
+      @include spot(0, -4%, 19px, 14px);
+    }
+    &:after {
+      content: "";
+      @include spot(-3px, -4px, 10px, 11px);
+    }
+  }
+  &:nth-child(4) {
+    @include spot(43px, 52%, 12px, 11px);
+    background: #dbec71;
+    border-radius: 50%;
+  }
+  &:nth-child(5) {
+    @include spot(43px, 52%, 12px, 11px);
+    background: #dbec71;
+    border-radius: 50%;
+  }
+  &:nth-child(6) {
+    @include spot(43px, 15%, 12px, 11px);
+    background: #88cc60;
+    &:before {
+      border-radius: 50%;
+      background: #88cc60;
+    }
+    &:after {
+      background: #88cc60;
+      width: 42px;
+      height: 40px;
+      right: -31px;
+    }
+  }
+  &:nth-child(7) {
+    @include spot(65px, 9%, 6px, 19px);
+    background: #88cc60;
+    &:before {
+      border-radius: 50%;
+      background: #88cc60;
+    }
+    &:after {
+      background: #88cc60;
+      width: 42px;
+      height: 40px;
+      right: -31px;
+    }
+  }
+  &:nth-child(8) {
+    @include spot(111px, 55%, 6px, 19px);
+    background: #88cc60;
+    z-index: -1;
+    transform: rotate(33deg);
+    &:before {
+      border-radius: 50%;
+      background: #88cc60;
+    }
+    &:after {
+      background: #88cc60;
+      width: 56px;
+      height: 61px;
+      right: -36px;
+    }
+  }
+  &:nth-child(9) {
+    @include spot(111px, 65%, 6px, 36px);
+    background: #88cc60;
+    z-index: -1;
+    transform: rotate(33deg);
+    &:before {
+      border-radius: 50%;
+      background: #88cc60;
+    }
+    &:after {
+      background: #88cc60;
+      width: 46px;
+      height: 34px;
+      right: -36px;
+    }
+  }
+  &:nth-child(10) {
+    @include spot(111px, 2%, 15px, 62px);
+    background: #88cc60;
+    z-index: -1;
+    transform: rotate(33deg);
+    &:before {
+      height: 20px;
+      border-radius: 50%;
+      background: #88cc60;
+      width: 41px;
+      right: -4px;
+      transform: rotate(-95deg);
+    }
+    &:after {
+      background: #88cc60;
+      width: 46px;
+      height: 34px;
+      right: -36px;
+    }
+  }
+}
+
+.earth-eyes {
+  bottom: 53%;
+  right: 115px;
+  width: 10px;
+  height: 18px;
+  animation: eyes-blink 4s 1.5s infinite;
+  &:before {
+    width: 3px;
+    height: 3px;
+    right: 3px;
+    top: 4px;
+  }
+  &.left {
+    right: 78px;
+    &:before {
+      right: 4px;
+    }
+  }
+}
+
+.covid-arms {
+  position: absolute;
+  background: url(https://www.transparenttextures.com/patterns/dark-stripes.png),
+    #f9515a;
+  width: 87px;
+  height: 35px;
+  z-index: 12;
+  bottom: 79px;
+  left: 65px;
+  transform: rotate(26deg) skew(57deg, -5deg);
+  border-radius: 10px 50% 50%;
+  &.right {
+    left: 255px;
+    bottom: 70px;
+    transform: rotate(146deg) skew(24deg, 5deg);
+    background: url(https://www.transparenttextures.com/patterns/dark-stripes.png),
+      #c52743;
+  }
+}
+
+.mask {
+  position: absolute;
+  top: -31%;
+  border: 5px solid #d5d7de;
+  border-color: transparent transparent transparent #d5d7de;
+  height: 296px;
+  width: 136px;
+  right: 13%;
+  border-radius: 250px 0 0 250px;
+  transform: rotate(268deg);
+}
+
+.mask-wrapper {
+  clip-path: polygon(50% 0%, 100% 38%, 96% 100%, 4% 100%, 0% 38%);
+  width: 90px;
+  height: 90px;
+  background-color: #fff;
+  position: absolute;
+  bottom: -2px;
+  right: 28%;
+  border-radius: 26px;
+  box-shadow: inset 0px -8px 10px 2px #c7c9d3;
+  &:before {
+    content: "";
+    position: absolute;
+    height: 81px;
+    width: 1px;
+    background: #e3e4e8;
+    z-index: 5;
+    box-shadow: -4px 1px 7px 1px #d5d7de;
+    right: 50%;
+  }
+}
+
+.mask-back {
+  width: 59px;
+  height: 53px;
+  border-radius: 5px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 24px;
+  right: 33%;
+  z-index: -1;
+  transform: rotate(40deg);
+}
+
+@media screen and (max-width: 490px) {
+  .covid,
+  .earth,
+  .earth-detail {
+    transform: scale(0.8);
+  }
+
+  .virus {
+    display: none;
+  }
+
+  .covid-arms {
+    transform: scale(0.8) rotate(26deg) skew(57deg, -5deg);
+    bottom: 98px;
+    left: 87px;
+  }
+
+  .covid-arms.right {
+    transform: scale(0.8) rotate(146deg) skew(24deg, 5deg);
+    bottom: 90px;
+    left: 236px;
+  }
+  .covid-pulse {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  .earth {
+    top: 60%;
+  }
+  .earth-detail {
+    top: 59%;
+  }
+  .mask {
+    top: -32%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .covid,
+  .earth,
+  .earth-detail {
+    transform: scale(0.6);
+  }
+  .covid-pulse {
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  .earth {
+    top: 51%;
+  }
+  .earth-detail {
+    top: 50%;
+  }
+
+  .covid-arms {
+    transform: scale(0.6) rotate(26deg) skew(57deg, -5deg);
+    bottom: 122px;
+    left: 107px;
+  }
+
+  .covid-arms.right {
+    transform: scale(0.6) rotate(146deg) skew(24deg, 5deg);
+    bottom: 116px;
+    left: 219px;
+  }
+
+  .mask {
+    top: -32%;
+  }
+}
+
+@media (max-height: 640px) {
+  .covid,
+  .earth,
+  .earth-detail {
+    transform: scale(0.7);
+  }
+  .covid-pulse {
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  .earth {
+    top: 56%;
+  }
+  .earth-detail {
+    top: 55%;
+  }
+  .mask {
+    top: -32%;
+  }
+  .covid-arms {
+    transform: scale(0.8) rotate(26deg) skew(57deg, -5deg);
+    bottom: 108px;
+    left: 95px;
+  }
+
+  .covid-arms.right {
+    transform: scale(0.8) rotate(146deg) skew(24deg, 5deg);
+    bottom: 101px;
+    left: 232px;
+  }
+}

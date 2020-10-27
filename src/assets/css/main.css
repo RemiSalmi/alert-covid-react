@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "gilroy-extrabold";
+  src: url("../fonts/Gilroy-ExtraBold.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "gilroy-light";
+  src: url("../fonts/Gilroy-Light.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #f9fcfe;
+}
+
+label,
+small {
+  color: #999ab8;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 1000;
+}
+
+.navLogo {
+  color: #524fa4;
+  font-family: "gilroy-extrabold";
+  padding-left: 70px;
+  font-size: x-large;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.blob {
+  height: 1500px;
+  width: 1500px;
+  position: fixed;
+  bottom: -400px;
+  right: -200px;
+}
+
+.navLogo:hover {
+  text-decoration: none;
+  color: #524fa4;
+}
+
+.navLogo span {
+  color: #f95680;
+}
+
+.landingBtn {
+  background: linear-gradient(
+    90deg,
+    rgba(240, 129, 108, 1) 0%,
+    rgba(223, 53, 85, 1) 100%
+  );
+  border: none;
+  font-family: "Rationale", sans-serif;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.landingBtn:hover {
+  opacity: 0.5;
+}
+
+.landingTitle {
+  font-family: "gilroy-extrabold";
+  font-size: 90px;
+  margin: 0;
+  letter-spacing: 4px;
+}
+
+.landingTitleColor1 {
+  color: #6476d2;
+  margin-bottom: -30px;
+}
+
+.landingTitleColor2 {
+  color: #8d9be2;
+}
+
+.landingRing {
+  height: 1300px;
+  width: 1300px;
+  position: fixed;
+  top: -650px;
+  left: -650px;
+}
+
+.landingRing g {
+  fill: #e9f4fd;
+}
