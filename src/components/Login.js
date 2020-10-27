@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 class Login extends React.Component{
@@ -16,7 +17,9 @@ class Login extends React.Component{
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg landingBtn" >Login</button>
                 <small className="m-3">Or</small>
-                <button type="" class="btn btn-primary btn-lg landingBtn" >Register</button>
+                <NavLink to="/register" className="btn btn-primary btn-lg landingBtn">
+                    Register
+                </NavLink> 
             </form>
          );
     }
