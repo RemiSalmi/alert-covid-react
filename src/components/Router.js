@@ -11,7 +11,7 @@ class Router extends React.Component{
   render(){
     return (      
       <BrowserRouter>
-        <div>
+        <div className="h-100 w-100">
             <Navbar></Navbar>
             <Switch>
               <Route path="/" component={Landing} exact/>
