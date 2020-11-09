@@ -2,9 +2,18 @@ import React from 'react';
 import '../assets/css/covid.scss'
 import {ReactComponent as Ring} from '../assets/images/ring.svg';
 import Login from './Login'
+import { connect } from "react-redux";
 
 
 class Landing extends React.Component{
+
+    componentDidUpdate(prevProps){
+        if (prevProps.connectedUser !== this.props.connectedUser) {
+            if(this.props.connectedUser !== null){
+                this.props.history.push("/dashboard")
+            }
+        }
+    }
        
     render(){
         return (
@@ -112,4 +121,10 @@ class Landing extends React.Component{
     
 }
 
-export default Landing;
+const mapStateToProps = (state) => ({
+    connectedUser: state.user.connectedUser,
+    loading: state.user.loading,
+    loginErrorMessage: state.user.messageError,
+});
+
+export default connect(mapStateToProps)(Landing);
