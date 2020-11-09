@@ -76,7 +76,22 @@ small {
   padding-right: 30px;
 }
 
-.landingBtn:hover {
+.locationBtn {
+  background: linear-gradient(
+    90deg,
+    rgb(108, 240, 166) 0%,
+    rgb(53, 223, 103) 100%
+  );
+  border: none;
+  font-family: "Rationale", sans-serif;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.landingBtn:hover,
+.locationBtn:hover {
   opacity: 0.5;
 }
 
@@ -116,11 +131,11 @@ small {
 }
 
 .MuiFormLabel-root.Mui-focused {
-  color: #f0816c !important;
+  color: #524fa4 !important;
 }
 
 .MuiInput-underline::after {
-  border-bottom: 2px solid #f0816c !important;
+  border-bottom: 2px solid #524fa4 !important;
 }
 
 .registerTitle {
