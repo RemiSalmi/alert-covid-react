@@ -26,7 +26,7 @@ class Landing extends React.Component{
                 <div className="row h-100">
                     <div className="col-md-6">
                         <div className="container justify-content-center h-100 d-flex flex-column" style={{paddingLeft:"5%"}}>
-                            <h1 className="landingTitle landingTitleColor1">Destroy</h1>
+                            <h1 className="landingTitle landingTitleColor1 landingMarginBot">Destroy</h1>
                             <h1 className="landingTitle landingTitleColor1">Corona <span className="landingTitleColor2">Virus.</span></h1>
                             
                             <Login></Login>

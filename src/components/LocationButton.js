@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from "react-redux";
+import {sendLocation} from "../actions/locationAction"
 
 
 class LocationButton extends React.Component{
 
-    sendLocation = () =>{
+    handleSendLocation = () =>{
         
         navigator.geolocation.getCurrentPosition((position)=>{
             let latitude = position.coords.latitude
@@ -11,6 +13,13 @@ class LocationButton extends React.Component{
 
             console.log(latitude)
             console.log(longitude)
+
+            let location = {
+                latitude : latitude,
+                longitude : longitude,
+                date : Date.now()
+            }
+            this.props.dispatch(sendLocation(location))
         })
 
         
@@ -18,10 +27,13 @@ class LocationButton extends React.Component{
        
     render(){
         return (
-            <button onClick={this.sendLocation} class="btn btn-primary btn-lg locationBtn" >Send my location</button>
+            <button onClick={this.handleSendLocation} class="btn btn-primary btn-lg locationBtn" >Send my location</button>
          );
     }
     
 }
-
-export default LocationButton;
+const mapStateToProps = (state) => ({
+    locations: state.location.locations,
+    locationsload: state.location.loading,
+});
+export default connect(mapStateToProps)(LocationButton);

@@ -31,10 +31,33 @@ small {
   color: #999ab8;
 }
 
+.mapMarker {
+  height: 100px;
+  width: 100px;
+  background-color: red;
+}
+
 .navbar {
   position: fixed;
   z-index: 1000;
   padding-left: 5%;
+}
+
+h1 {
+  font-family: "gilroy-extrabold";
+}
+
+.customBg {
+  background-color: #f9fcfe !important;
+}
+
+.dash-blob-1 {
+  position: fixed;
+  bottom: -500px;
+  right: -413px;
+  z-index: -100;
+  height: 1000px;
+  width: 1000px;
 }
 
 .navLogo {
@@ -104,6 +127,9 @@ small {
 
 .landingTitleColor1 {
   color: #6476d2;
+}
+
+.landingMarginBot {
   margin-bottom: -30px;
 }
 
@@ -117,6 +143,7 @@ small {
   position: fixed;
   top: -650px;
   left: -650px;
+  z-index: -100;
 }
 
 .landingRing g {
@@ -164,6 +191,24 @@ small {
 
   .landingTitle {
     font-size: 80px;
+  }
+
+  .dashResp {
+    flex-direction: column;
+  }
+
+  .dashResp2 {
+    display: contents;
+  }
+
+  .dashResp2 .locationBtn {
+    margin-left: 0 !important;
+    margin-top: 5px;
+  }
+
+  .dashResp2 .landingBtn {
+    margin-left: 0 !important;
+    margin-top: 5px;
   }
 }
 

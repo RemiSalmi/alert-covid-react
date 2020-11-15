@@ -9,7 +9,7 @@ class PositiveButton extends React.Component{
        
     render(){
         return (
-            <button onClick={this.positive} class="btn btn-primary btn-lg landingBtn" >I'm positive</button>
+            <button onClick={this.positive} class="btn btn-primary btn-lg landingBtn ml-3" >I'm positive</button>
          );
     }
     

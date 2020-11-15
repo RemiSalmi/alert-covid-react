@@ -7,8 +7,8 @@ export const ERROR = 'ERROR';
 export const RESET_MESSAGE_ERROR = 'RESET_MESSAGE_ERROR';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
-const LOGIN_URL = 'http://localhost:7000/auth/realms/master/protocol/openid-connect/token'
-const REGISTER_URL = 'http://localhost:8080/users/'
+const LOGIN_URL = 'http://146.59.234.45:8080/auth/realms/master/protocol/openid-connect/token'
+const REGISTER_URL = 'http://146.59.234.45:8081/users/'
 
 export function login(user) {
     let data = {
@@ -30,8 +30,14 @@ export function login(user) {
             
         })
         .catch(err =>{
+            console.log(err)
+            if(err.response !== undefined){
+                dispatch(error(err.response.data.error_description))
+            }else{
+                dispatch(error("A problem occured"))
+            }
+
             
-            dispatch(error(err.response.data.error_description))
         })
         
     };   
