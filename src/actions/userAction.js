@@ -9,8 +9,8 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
 const LOGIN_URL = 'https://iam.cloud-iam.com/auth/realms/alert-covid/protocol/openid-connect/token'
-const USER_URL = 'http://146.59.234.45:8081/users/'
-const REGISTER_URL = 'http://146.59.234.45:8081/users/'
+const USER_URL = 'https://alert-covid.ovh:8082/users/'
+const REGISTER_URL = 'https://alert-covid.ovh:8082/users/'
 
 export function login(user) {
     let data = {
@@ -21,6 +21,7 @@ export function login(user) {
         password : user.password
     }
     return dispatch => {
+
         axios.post(LOGIN_URL,qs.stringify(data))
         .then(res => {
             sessionStorage.setItem('token',res.data.access_token)
