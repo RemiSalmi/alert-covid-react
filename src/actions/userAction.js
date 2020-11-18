@@ -8,7 +8,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
-const LOGIN_URL = 'https://iam.cloud-iam.com/auth/realms/alert-covid/protocol/openid-connect/token'
+const LOGIN_URL = 'http://alert-covid.ovh:8080/auth/realms/master/protocol/openid-connect/token'
 const USER_URL = 'http://alert-covid.ovh:8081/users/'
 const REGISTER_URL = 'http://alert-covid.ovh:8081/users/'
 
