@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import {login, resetMessageError} from '../actions/userAction'
+import {login} from '../actions/userAction'
 import { connect } from "react-redux";
 import {OpenFeedback} from "../actions/feedbackAction"
 

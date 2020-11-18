@@ -1,9 +1,6 @@
 import axios from 'axios'
 import {OpenFeedback} from "./feedbackAction"
 
-const qs = require("querystring");
-var jwt = require('jsonwebtoken');
-
 export const GET_CONTACT_LOCATION_SUCCESS = 'GET_CONTACT_LOCATION_SUCCESS';
 export const CONTACT_LOCATION_LOADING = 'CONTACT_LOCATION_LOADING';
 
@@ -15,7 +12,6 @@ export function getContactLocation() {
         let bearer  = 'Bearer ' + sessionStorage.getItem('token')
         axios.get(GET_URL,{ 'headers': { 'Authorization': bearer } })
         .then(res => {
-            console.log(res)
             dispatch(getContactLocationSuccess(res.data))
         })
         .catch(err =>{

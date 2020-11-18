@@ -1,9 +1,6 @@
 import axios from 'axios'
 import {OpenFeedback} from "./feedbackAction"
 
-const qs = require("querystring");
-var jwt = require('jsonwebtoken');
-
 export const ADD_POSITIVE_SUCCESS = 'ADD_POSITIVE_SUCCESS';
 export const GET_POSITIVE_SUCCESS = 'GET_POSITIVE_SUCCESS';
 export const POSITIVE_LOADING = 'POSITIVE_LOADING';

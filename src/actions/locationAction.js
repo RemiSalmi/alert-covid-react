@@ -1,10 +1,6 @@
 import axios from 'axios'
 import {OpenFeedback} from "./feedbackAction"
 
-const qs = require("querystring");
-var jwt = require('jsonwebtoken');
-
-
 export const SEND_LOCATION_SUCCESS = 'SEND_LOCATION_SUCCESS';
 export const LOADING = 'LOADING';
 export const GET_LOCATION_SUCCESS = 'GET_LOCATION_SUCCESS';
@@ -17,7 +13,6 @@ export function getLocation(idUser) {
         let bearer  = 'Bearer ' + sessionStorage.getItem('token')
         axios.get(LOCATIONS_URL+idUser,{ 'headers': { 'Authorization': bearer } })
         .then(res =>{
-            console.log(res)
             dispatch(getLocationSuccess(res.data))
         })
         .catch(err =>{
@@ -38,7 +33,6 @@ export function sendLocation(location) {
         let bearer  = 'Bearer ' + sessionStorage.getItem('token')
         axios.post(LOCATIONS_URL,location,{ 'headers': { 'Authorization': bearer } })
         .then(res =>{
-            console.log(res)
             dispatch(sendLocationSuccess(location))
             dispatch(OpenFeedback("success","Your location has been sent !"))
         })
