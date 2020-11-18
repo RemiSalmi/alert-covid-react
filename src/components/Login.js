@@ -3,13 +3,7 @@ import { NavLink } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import {login, resetMessageError} from '../actions/userAction'
 import { connect } from "react-redux";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
+import {OpenFeedback} from "../actions/feedbackAction"
 
 class Login extends React.Component{
 
@@ -18,8 +12,6 @@ class Login extends React.Component{
         this.state = {
           username: null,
           password : null,
-          openError : false,
-          messageError : null
         };
     }
 
@@ -29,22 +21,6 @@ class Login extends React.Component{
 
     handleChangePassword = (e) => {
         this.setState({ password: e.target.value });
-    };
-
-    handleCloseLocalError = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        this.setState({
-            openError: false
-        })
-    };
-
-    handleCloseLoginError = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        this.props.dispatch(resetMessageError());
     };
 
     handleClickLogin = (e) =>{
@@ -59,8 +35,7 @@ class Login extends React.Component{
             this.setState({ username: "" });
             this.setState({ password: "" });
         }else{
-            this.setState({ openError: true });
-            this.setState({ messageError: "Email and password can't be empty" });
+            this.props.dispatch(OpenFeedback("error","Username and password can't be empty !"))
         }
         
     }
@@ -77,17 +52,6 @@ class Login extends React.Component{
                         Register
                     </NavLink> 
                  </div>
-
-                 <Snackbar open={this.state.openError} autoHideDuration={6000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} onClose={this.handleCloseLocalError}>
-                    <Alert onClose={this.handleCloseLocalError} severity="error">
-                        {this.state.messageError}
-                    </Alert>
-                </Snackbar>
-                <Snackbar open={this.props.loginErrorMessage !== null} autoHideDuration={6000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} onClose={this.handleCloseLoginError}>
-                    <Alert onClose={this.handleCloseLoginError} severity="error">
-                        {this.props.loginErrorMessage === undefined ? ("Problème de connexion avec le serveur"):(this.props.loginErrorMessage)}
-                    </Alert>
-                </Snackbar>
             </form>
          );
     }
@@ -96,7 +60,6 @@ class Login extends React.Component{
 const mapStateToProps = (state) => ({
     connectedUser: state.user.connectedUser,
     loading: state.user.loading,
-    loginErrorMessage: state.user.messageError,
 });
 
 export default connect(mapStateToProps)(Login);

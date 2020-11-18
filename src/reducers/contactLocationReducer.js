@@ -1,15 +1,12 @@
   
 import {
     GET_CONTACT_LOCATION_SUCCESS,
-    ERROR,
     CONTACT_LOCATION_LOADING,
-    RESET_MESSAGE_ERROR,
   } from '../actions/contactLocationAction';
 
   const initialState = {
     locations : [],
     loading: false,
-    messageError : null
 };
 
 export default function contactLocationReducer(state = initialState, action) {
@@ -24,7 +21,6 @@ export default function contactLocationReducer(state = initialState, action) {
         ...state,
         locations : newContactLocation,
         loading: false,
-        messageError : null
       };
 
       case CONTACT_LOCATION_LOADING :
@@ -32,7 +28,6 @@ export default function contactLocationReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        messageError : null
       };
     
     

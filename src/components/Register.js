@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import {register} from '../actions/userAction'
 import { connect } from "react-redux";
+import {OpenFeedback} from "../actions/feedbackAction"
 
 
 class Register extends React.Component{
@@ -62,7 +63,11 @@ class Register extends React.Component{
                     "password" : this.state.password
                 }
                 this.props.dispatch(register(user));
+            }else{
+                this.props.dispatch(OpenFeedback("error","Passwords not matching"))
             }
+        }else{
+            this.props.dispatch(OpenFeedback("error","You have to fill every fields"))
         }
     }
        

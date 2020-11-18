@@ -1,14 +1,26 @@
 import React from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import { connect } from "react-redux";
-import DeleteLocationButton from './DeleteLocationButton';
 import {getContactLocation} from "../actions/contactLocationAction"
+import {getLocation} from "../actions/locationAction"
 
 
 class Map extends React.Component{
 
     componentDidMount(){
         this.props.dispatch(getContactLocation())
+        if(this.props.connectedUser !== null){
+            this.props.dispatch(getLocation(this.props.connectedUser.id_user))
+        }
+        
+    }
+
+    componentDidUpdate(prevProps){
+        if (prevProps.connectedUser !== this.props.connectedUser) {
+            if(this.props.connectedUser !== null){
+                this.props.dispatch(getLocation(this.props.connectedUser.id_user))
+            }
+        }
     }
 
     constructor(props) {
@@ -47,15 +59,18 @@ class Map extends React.Component{
             <ReactMapGL {... this.state.viewport} mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN} onViewportChange={viewport =>{
                 this.setState({viewport:viewport})
             }}>
-                {
-                    loc.map((location, index) =>{
+                { loc !== undefined ?
+                    (
+                        loc.map((location, index) =>{
+                            
+                            return(
+                                <Marker latitude={location.latitude} longitude={location.longitude} offsetTop={-30} offsetLeft={-11.25}>
+                                    <i class="fas fa-map-marker-alt" style={{color:"green",fontSize:"30px",cursor:"pointer"}} onClick={()=>{this.handleClickPosition(location,index,"classique")}}></i>
+                                </Marker>
+                            )
+                        }) 
+                    ):(null)
                         
-                        return(
-                            <Marker latitude={location.latitude} longitude={location.longitude} offsetTop={-30} offsetLeft={-11.25}>
-                                <i class="fas fa-map-marker-alt" style={{color:"green",fontSize:"30px",cursor:"pointer"}} onClick={()=>{this.handleClickPosition(location,index,"classique")}}></i>
-                            </Marker>
-                        )
-                    })     
                 }
                 {
                     this.props.contactLocations.map((location, index) =>{
@@ -74,7 +89,6 @@ class Map extends React.Component{
                                 <span>Latitude : {this.state.selectedLocation.latitude}</span>
                                 <span>Longitude : {this.state.selectedLocation.longitude}</span>    
                                 <span>Le {new Date(this.state.selectedLocation.date).toLocaleString()}</span>
-                                {this.state.selectedLocation.type === "contact" ? (null):(<DeleteLocationButton location={this.state.selectedLocation} locIndex={this.state.selectedIndex} closePopup={this.closePopup}></DeleteLocationButton>)}
                             </div>
                         </Popup>
                     ) : null
@@ -91,6 +105,7 @@ const mapStateToProps = (state) => ({
     locationsLoading : state.location.loading,
     contactLocations : state.contactLocation.locations,
     contactLocationsLoading : state.contactLocation.loading,
+    connectedUser: state.user.connectedUser,
 });
 
 export default connect(mapStateToProps)(Map);

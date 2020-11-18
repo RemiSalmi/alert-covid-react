@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from "react-redux";
+import {imPositive} from "../actions/positiveAction"
 
 
 class PositiveButton extends React.Component{
 
     positive = () =>{
-        console.log("positif")
+        console.log("positive")
+        this.props.dispatch(imPositive(this.props.connectedUser.id_user))
     }
        
     render(){
@@ -14,5 +17,8 @@ class PositiveButton extends React.Component{
     }
     
 }
+const mapStateToProps = (state) => ({
+    connectedUser: state.user.connectedUser,
+});
 
-export default PositiveButton;
+export default connect(mapStateToProps)(PositiveButton);

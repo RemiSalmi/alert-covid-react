@@ -1,16 +1,13 @@
   
 import {
     SEND_LOCATION_SUCCESS,
-    ERROR,
     LOADING,
-    DELETE_LOCATION_SUCCESS,
-    RESET_MESSAGE_ERROR,
+    GET_LOCATION_SUCCESS
   } from '../actions/locationAction';
 
   const initialState = {
     locations : [],
     loading: false,
-    messageError : null
 };
 
 export default function locationReducer(state = initialState, action) {
@@ -26,28 +23,23 @@ export default function locationReducer(state = initialState, action) {
         ...state,
         locations : newLocation,
         loading: false,
-        messageError : null
-      };
-
-      case DELETE_LOCATION_SUCCESS :
-      
-        let deleteLocation = state.locations
-        deleteLocation.splice(action.payload.index,1)
-
-      return {
-        ...state,
-        locations : deleteLocation,
-        loading: false,
-        messageError : null
       };
     
-      case LOADING :
-      
-      return {
-        ...state,
-        loading: true,
-        messageError : null
-      };
+    case GET_LOCATION_SUCCESS :
+    
+    return {
+      ...state,
+      locations : action.payload.locations,
+      loading: false,
+      messageError : null
+    };
+
+    case LOADING :
+    
+    return {
+      ...state,
+      loading: true,
+    };
     
     
     default:

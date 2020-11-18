@@ -4,6 +4,8 @@ import Landing from './Landing';
 import Register from './Register';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
+import Account from './Account';
+import Feedback from './Feedback';
 
 
 
@@ -14,10 +16,12 @@ class Router extends React.Component{
       <BrowserRouter>
         <div className="h-100 w-100">
             <Navbar></Navbar>
+            <Feedback></Feedback>
             <Switch>
               <Route path="/" component={Landing} exact/>
               <Route path="/register" component={Register} exact/>
               <Route path="/dashboard" component={Dashboard} exact/>
+              <Route path="/account" component={Account} exact/>
             </Switch>
           </div>
       </BrowserRouter>

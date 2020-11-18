@@ -1,7 +1,6 @@
 import React from 'react';
 import LocationButton from './LocationButton';
 import PositiveButton from './PositiveButton';
-import DeleteLocationButton from './DeleteLocationButton';
 import Map from './Map';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -14,6 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Tab from '@material-ui/core/Tab';
 import {ReactComponent as Ring} from '../assets/images/ring.svg';
 import { connect } from "react-redux";
+import { getPositive } from "../actions/positiveAction"
 
 
 function TabPanel(props) {
@@ -46,11 +46,26 @@ function a11yProps(index) {
 
 class Dashboard extends React.Component{
 
+    componentDidMount(){
+        
+        if(this.props.connectedUser !== null){
+            this.props.dispatch(getPositive(this.props.connectedUser.id_user))
+        }
+        
+    }
+
+    componentDidUpdate(prevProps){
+        if (prevProps.connectedUser !== this.props.connectedUser) {
+            if(this.props.connectedUser !== null){
+                this.props.dispatch(getPositive(this.props.connectedUser.id_user))
+            }
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
           value : 0,
-          value2 : 0
         };
     }
 
@@ -58,22 +73,17 @@ class Dashboard extends React.Component{
         this.setState({value:newValue})
     };
 
-    handleChange2 = (event, newValue) => {
-        this.setState({value2:newValue})
-    };
-
-    
-       
     render(){
         return (
             <div className="container-fluid pt-5 h-100 w-100 d-flex justify-content-around flex-column">
                 <div className="row h-75 pt-3 justify-content-center">
                     <div className="col-md-11">
-                        <Paper elevation={3} className="h-100 p-2 customBg">
+                        <Paper elevation={3} className="h-100 p-2 customBg d-flex flex-column">
                             <div className="d-flex justify-content-between dashResp">
                                 <Tabs value={this.state.value} onChange={this.handleChange} TabIndicatorProps={{style: {background:'#6476d2'}}} aria-label="simple tabs example">
                                     <Tab label="Map" {...a11yProps(0)} />
                                     <Tab label="List" {...a11yProps(1)} />
+                                    <Tab label="My Positive dates" {...a11yProps(2)} />
                                 </Tabs>
                                 <div className="d-flex ">
                                     <LocationButton></LocationButton>
@@ -85,27 +95,72 @@ class Dashboard extends React.Component{
                                 <Map mapType="classic"></Map>
                             </TabPanel>
                             <TabPanel value={this.state.value} index={1}>
-                                <TableContainer component={Paper}>
-                                    <Table className="" aria-label="simple table">
+                                <TableContainer className="tableH" component={Paper}>
+                                    <Table stickyHeader className="" aria-label="simple table">
                                         <TableHead>
                                             <TableRow>
+                                                <TableCell>Type</TableCell>
                                                 <TableCell>Latitude</TableCell>
                                                 <TableCell>Longitude</TableCell>
                                                 <TableCell>Date</TableCell>
-                                                <TableCell></TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                        {this.props.locations.map((location, index) => (
+                                        {this.props.locations !== undefined ?
+                                        (
+                                            this.props.locations.map((location, index) => (
+                                                <TableRow>
+                                                    <TableCell>Safe</TableCell>
+                                                    <TableCell component="th" scope="row">
+                                                        {location.latitude}
+                                                    </TableCell>
+                                                    <TableCell>{location.longitude}</TableCell>
+                                                    <TableCell>{new Date(location.date).toLocaleString()}</TableCell>
+                                                </TableRow>
+                                            ))
+                                        ):(null)
+                                        }
+
+                                        {this.props.contactLocations !== undefined ?
+                                            (
+                                                this.props.contactLocations.map((location, index) => (
+                                                    <TableRow>
+                                                        <TableCell>Contact</TableCell>
+                                                        <TableCell component="th" scope="row">
+                                                            {location.latitude}
+                                                        </TableCell>
+                                                        <TableCell>{location.longitude}</TableCell>
+                                                        <TableCell>{new Date(location.date).toLocaleString()}</TableCell>
+                                                    </TableRow>
+                                                ))
+                                            ):(null)
+                                        }
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </TabPanel>
+                            <TabPanel value={this.state.value} index={2}>
+                                <TableContainer className="tableH" component={Paper}>
+                                    <Table stickyHeader className="" aria-label="simple table">
+                                        <TableHead>
                                             <TableRow>
-                                                <TableCell component="th" scope="row">
-                                                    {location.latitude}
-                                                </TableCell>
-                                                <TableCell>{location.longitude}</TableCell>
-                                                <TableCell>{new Date(location.date).toLocaleString()}</TableCell>
-                                                <TableCell><DeleteLocationButton location={location} locIndex={index}></DeleteLocationButton></TableCell>
+                                                <TableCell>Date</TableCell>
                                             </TableRow>
-                                        ))}
+                                        </TableHead>
+                                        <TableBody>
+                                        {this.props.positives !== undefined ?
+                                        (
+                                            this.props.positives.map((positive, index) => {
+                                                
+                                                return(
+                                                <TableRow>
+                                                    <TableCell>{new Date(positive.date).toLocaleString()}</TableCell>
+                                                </TableRow>)
+                                            }
+                                                
+                                        )
+                                        ):(null)
+                                        }
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
@@ -135,6 +190,9 @@ const mapStateToProps = (state) => ({
     locationsLoading : state.location.loading,
     contactLocations : state.contactLocation.locations,
     contactLocationsLoading : state.contactLocation.loading,
+    positives : state.positives.positives,
+    positivesLoading : state.positives.loading,
+    connectedUser: state.user.connectedUser,
 });
 
 export default connect(mapStateToProps)(Dashboard);

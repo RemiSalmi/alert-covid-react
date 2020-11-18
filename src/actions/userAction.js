@@ -1,13 +1,15 @@
 import axios from 'axios'
+import {OpenFeedback} from "./feedbackAction"
+
 const qs = require("querystring");
 var jwt = require('jsonwebtoken');
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const ERROR = 'ERROR';
-export const RESET_MESSAGE_ERROR = 'RESET_MESSAGE_ERROR';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const LOGOUT = 'LOGOUT';
 
-const LOGIN_URL = 'http://146.59.234.45:8080/auth/realms/master/protocol/openid-connect/token'
+const LOGIN_URL = 'https://iam.cloud-iam.com/auth/realms/alert-covid/protocol/openid-connect/token'
+const USER_URL = 'http://146.59.234.45:8081/users/'
 const REGISTER_URL = 'http://146.59.234.45:8081/users/'
 
 export function login(user) {
@@ -22,19 +24,15 @@ export function login(user) {
         axios.post(LOGIN_URL,qs.stringify(data))
         .then(res => {
             sessionStorage.setItem('token',res.data.access_token)
-            const  email = jwt.decode(sessionStorage.getItem('token')).email
-            let user = {
-                email: email
-            }
-            dispatch(loginSuccess(user))
-            
+            dispatch(getConnectedUser())
+            dispatch(OpenFeedback("success","You are connected !"))
         })
         .catch(err =>{
             console.log(err)
             if(err.response !== undefined){
-                dispatch(error(err.response.data.error_description))
+                dispatch(OpenFeedback("error",err.response.data.error_description))
             }else{
-                dispatch(error("A problem occured"))
+                dispatch(OpenFeedback("error","A problem occured"))
             }
 
             
@@ -43,6 +41,30 @@ export function login(user) {
     };   
 }
 
+export function getConnectedUser() {
+    return dispatch => {
+        if(jwt.decode(sessionStorage.getItem('token')) !== null){
+            const  email = jwt.decode(sessionStorage.getItem('token')).email
+            if(email !== null && email !== undefined){
+                let bearer  = 'Bearer ' + sessionStorage.getItem('token')
+                axios.get(USER_URL+email,{ 'headers': { 'Authorization': bearer } })
+                .then(userRes =>{
+                    dispatch(loginSuccess(userRes.data))
+                })
+                .catch(err =>{
+                    console.log(err)
+                    if(err.response !== undefined){
+                        dispatch(OpenFeedback("error",err.response.data.error_description))
+                    }else{
+                        dispatch(OpenFeedback("error","A problem occured"))
+                    }
+                })
+            }
+        }
+    }; 
+}
+      
+
 export function register(user) {
     return dispatch => {
         console.log(user)
@@ -50,11 +72,11 @@ export function register(user) {
         
         axios.post(REGISTER_URL,user,{ 'headers': { 'Authorization': bearer } })
         .then(res => {
-            console.log(res)
             dispatch(registerSuccess(user))
+            dispatch(OpenFeedback('success',"You are now registered !"))
         })
         .catch(err =>{
-            dispatch(error(err.response.data.status))
+            dispatch(OpenFeedback("error",err.response.data.status))
         })
         
     };   
@@ -70,12 +92,7 @@ export const registerSuccess = () => ({
     payload: {}
 });
 
-export const error = error => ({
-    type: ERROR,
-    payload: { error }
-});
-
-export const resetMessageError = () => ({
-    type: RESET_MESSAGE_ERROR,
+export const logout = () => ({
+    type: LOGOUT,
     payload: {}
 });

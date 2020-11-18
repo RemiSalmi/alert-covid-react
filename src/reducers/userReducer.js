@@ -1,16 +1,14 @@
   
 import {
     LOGIN_SUCCESS,
-    ERROR,
-    RESET_MESSAGE_ERROR,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    LOGOUT
   } from '../actions/userAction';
 
   const initialState = {
     connectedUser : null,
     loading: false,
     created : false,
-    messageError : null
 };
 
 export default function userReducer(state = initialState, action) {
@@ -26,7 +24,6 @@ export default function userReducer(state = initialState, action) {
         connectedUser : newConnectedUser,
         loading: false,
         error : false,
-        messageError : null
       };
 
     case REGISTER_SUCCESS :
@@ -35,27 +32,17 @@ export default function userReducer(state = initialState, action) {
       ...state,
       loading: false,
       created : true,
-      messageError : null,
       };
     
-    case ERROR :
+    case LOGOUT :
       
-      let newError = action.payload.error
-
       return {
         ...state,
+        connectedUser : null,
         loading: false,
         error : true,
-        messageError : newError
+        messageError : null
       };
-    
-    case RESET_MESSAGE_ERROR :
-
-    return {
-    ...state,
-    loading: false,
-    messageError : null,
-    };
     
     default:
       // ALWAYS have a default case in a reducer
