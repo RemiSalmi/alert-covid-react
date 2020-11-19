@@ -5,7 +5,7 @@ export const ADD_POSITIVE_SUCCESS = 'ADD_POSITIVE_SUCCESS';
 export const GET_POSITIVE_SUCCESS = 'GET_POSITIVE_SUCCESS';
 export const POSITIVE_LOADING = 'POSITIVE_LOADING';
 
-const POSITIVE_URL = 'http://146.59.234.45:8090/positive/'
+const POSITIVE_URL = 'https://alert-covid.ovh:8090/positive/'
 
 export function imPositive(idUser) {
     return dispatch => {

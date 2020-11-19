@@ -5,7 +5,7 @@ export const SEND_LOCATION_SUCCESS = 'SEND_LOCATION_SUCCESS';
 export const LOADING = 'LOADING';
 export const GET_LOCATION_SUCCESS = 'GET_LOCATION_SUCCESS';
 
-const LOCATIONS_URL = "http://146.59.234.45:9000/stream/location/"
+const LOCATIONS_URL = "https://alert-covid.ovh:9000/stream/location/"
 
 export function getLocation(idUser) {
     return dispatch => {

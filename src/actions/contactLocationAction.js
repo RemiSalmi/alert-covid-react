@@ -4,7 +4,7 @@ import {OpenFeedback} from "./feedbackAction"
 export const GET_CONTACT_LOCATION_SUCCESS = 'GET_CONTACT_LOCATION_SUCCESS';
 export const CONTACT_LOCATION_LOADING = 'CONTACT_LOCATION_LOADING';
 
-const GET_URL = 'http://146.59.234.45:8091/locations/'
+const GET_URL = 'https://alert-covid.ovh:8091/locations/'
 
 export function getContactLocation() {
     return dispatch => {
