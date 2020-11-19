@@ -28,7 +28,7 @@ class LocationButton extends React.Component{
        
     render(){
         return (
-            <button onClick={this.handleSendLocation} class="btn btn-primary btn-lg locationBtn" >Send my location</button>
+            <button onClick={this.handleSendLocation} className="btn btn-primary btn-lg locationBtn" >Send my location</button>
          );
     }
     

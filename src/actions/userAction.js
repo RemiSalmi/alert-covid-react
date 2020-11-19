@@ -1,37 +1,32 @@
 import axios from 'axios'
 import {OpenFeedback} from "./feedbackAction"
 
-const qs = require("querystring");
 var jwt = require('jsonwebtoken');
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
-const LOGIN_URL = 'http://alert-covid.ovh:8080/auth/realms/master/protocol/openid-connect/token'
+const LOGIN_URL = 'http://alert-covid.ovh:4000/auth/'
 const USER_URL = 'http://alert-covid.ovh:8081/users/'
 const REGISTER_URL = 'http://alert-covid.ovh:8081/users/'
 
 export function login(user) {
     let data = {
-        client_id : "alert-covid-react",
-        grant_type : "password",
-        scope : "openid",
         username : user.username,
         password : user.password
     }
     return dispatch => {
 
-        axios.post(LOGIN_URL,qs.stringify(data))
+        axios.post(LOGIN_URL,data)
         .then(res => {
-            sessionStorage.setItem('token',res.data.access_token)
+            sessionStorage.setItem('token',res.data.data)
             dispatch(getConnectedUser())
             dispatch(OpenFeedback("success","You are connected !"))
         })
         .catch(err =>{
-            console.log(err)
             if(err.response !== undefined){
-                dispatch(OpenFeedback("error",err.response.data.error_description))
+                dispatch(OpenFeedback("error",err.response.data.data))
             }else{
                 dispatch(OpenFeedback("error","A problem occured"))
             }

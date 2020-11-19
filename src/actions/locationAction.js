@@ -29,14 +29,18 @@ export function getLocation(idUser) {
 
 export function sendLocation(location) {
     return dispatch => {
+        console.log("start send")
+        console.log(location)
         dispatch(loading())
         let bearer  = 'Bearer ' + sessionStorage.getItem('token')
         axios.post(LOCATIONS_URL,location,{ 'headers': { 'Authorization': bearer } })
         .then(res =>{
+            console.log("ok")
             dispatch(sendLocationSuccess(location))
             dispatch(OpenFeedback("success","Your location has been sent !"))
         })
         .catch(err =>{
+            console.log("not ok")
             console.log(err)
             if(err.response !== undefined){
                 dispatch(OpenFeedback("error",err.response.data.error_description))
