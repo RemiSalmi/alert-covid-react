@@ -7,7 +7,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
-const LOGIN_URL = 'http://alert-covid.ovh:4000/auth/'
+const LOGIN_URL = 'https://alert-covid.ovh:4001/auth/'
 const USER_URL = 'http://alert-covid.ovh:8081/users/'
 const REGISTER_URL = 'http://alert-covid.ovh:8081/users/'
 
