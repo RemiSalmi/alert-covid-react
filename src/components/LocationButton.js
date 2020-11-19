@@ -6,8 +6,9 @@ import {sendLocation} from "../actions/locationAction"
 class LocationButton extends React.Component{
 
     handleSendLocation = () =>{
-        
+        console.log("getLoc begin")
         navigator.geolocation.getCurrentPosition((position)=>{
+            console.log("getting loc")
             let latitude = position.coords.latitude
             let longitude = position.coords.longitude
 
@@ -23,7 +24,7 @@ class LocationButton extends React.Component{
             this.props.dispatch(sendLocation(location))
         })
 
-        
+        console.log("get loc end")
     }
        
     render(){
