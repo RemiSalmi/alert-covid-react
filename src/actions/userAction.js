@@ -4,6 +4,7 @@ import {OpenFeedback} from "./feedbackAction"
 var jwt = require('jsonwebtoken');
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const USER_LOADING = 'USER_LOADING';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
@@ -62,7 +63,8 @@ export function getConnectedUser() {
 
 export function register(user) {
     return dispatch => {
-        console.log(user)
+
+        dispatch(userLoading())
         let bearer  = 'Bearer ' + sessionStorage.getItem('token')
         
         axios.post(USER_URL,user,{ 'headers': { 'Authorization': bearer } })
@@ -80,6 +82,11 @@ export function register(user) {
 export const loginSuccess = user => ({
     type: LOGIN_SUCCESS,
     payload: { user }
+});
+
+export const userLoading = () => ({
+    type: USER_LOADING,
+    payload: { }
 });
 
 export const registerSuccess = () => ({
