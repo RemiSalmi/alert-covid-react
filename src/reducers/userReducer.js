@@ -3,6 +3,7 @@ import {
     LOGIN_SUCCESS,
     REGISTER_SUCCESS,
     USER_LOADING,
+    RESET_CREATED,
     LOGOUT
   } from '../actions/userAction';
 
@@ -40,6 +41,13 @@ export default function userReducer(state = initialState, action) {
       return {
       ...state,
       loading: true,
+      };
+    
+    case RESET_CREATED :
+
+      return {
+      ...state,
+      created: false,
       };
     
     case LOGOUT :

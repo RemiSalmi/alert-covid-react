@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const USER_LOADING = 'USER_LOADING';
+export const RESET_CREATED = 'RESET_CREATED';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
@@ -86,6 +87,11 @@ export const loginSuccess = user => ({
 
 export const userLoading = () => ({
     type: USER_LOADING,
+    payload: { }
+});
+
+export const resetCreated = () => ({
+    type: RESET_CREATED,
     payload: { }
 });
 

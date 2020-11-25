@@ -3,9 +3,14 @@ import '../assets/css/covid.scss'
 import {ReactComponent as Ring} from '../assets/images/ring.svg';
 import Login from './Login'
 import { connect } from "react-redux";
+import {resetCreated} from '../actions/userAction'
 
 
 class Landing extends React.Component{
+
+    componentDidMount(){
+        this.props.dispatch(resetCreated())
+    }
 
     componentDidUpdate(prevProps){
         if (prevProps.connectedUser !== this.props.connectedUser) {
