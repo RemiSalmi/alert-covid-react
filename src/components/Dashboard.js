@@ -130,7 +130,7 @@ class Dashboard extends React.Component{
                                                             {location.latitude}
                                                         </TableCell>
                                                         <TableCell>{location.longitude}</TableCell>
-                                                        <TableCell>{new Date(location.date).toLocaleString()}</TableCell>
+                                                        <TableCell>{new Date(new Date(location.date).setHours(new Date(location.date).getHours()+1)).toLocaleString()}</TableCell>
                                                     </TableRow>
                                                 ))
                                             ):(null)

@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import Account from './Account';
 import Feedback from './Feedback';
+import ACBackdrop from './ACBackdrop';
 
 
 
@@ -17,6 +18,7 @@ class Router extends React.Component{
         <div className="h-100 w-100">
             <Navbar></Navbar>
             <Feedback></Feedback>
+            <ACBackdrop></ACBackdrop>
             <Switch>
               <Route path="/" component={Landing} exact/>
               <Route path="/register" component={Register} exact/>

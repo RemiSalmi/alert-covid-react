@@ -88,7 +88,8 @@ class Map extends React.Component{
                                 {this.state.selectedLocation.type === "contact" ? (<span class="badge badge-pill badge-danger d-table mt-3">Positive contact</span>  ):(<span class="badge badge-pill badge-success d-table mt-3">Safe</span>  )}
                                 <span>Latitude : {this.state.selectedLocation.latitude}</span>
                                 <span>Longitude : {this.state.selectedLocation.longitude}</span>    
-                                <span>Le {new Date(this.state.selectedLocation.date).toLocaleString()}</span>
+                                <span>Le {this.state.selectedLocation.type === "contact" ? (new Date(new Date(this.state.selectedLocation.date).setHours(new Date(this.state.selectedLocation.date).getHours()+1)).toLocaleString()):(new Date(this.state.selectedLocation.date).toLocaleString())}</span>
+                                
                             </div>
                         </Popup>
                     ) : null
